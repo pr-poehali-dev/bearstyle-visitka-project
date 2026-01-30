@@ -61,10 +61,10 @@ const Index = () => {
               Создавайте безупречные укладки с BearStyle.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/20 h-14 px-8 text-base" href="#products">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/20 h-14 px-8 text-base" href="#products">
                 Наша продукция
               </Button>
-              <Button size="lg" variant="outline" className="glass-effect border-2 h-14 px-8 text-base text-white hover:bg-white/10" href="#contact">
+              <Button size="lg" variant="outline" className="glass-effect border-2 border-white/40 h-14 px-8 text-base text-white hover:bg-white/20 hover:text-white" href="#contact">
                 Оптовые поставки
               </Button>
             </div>

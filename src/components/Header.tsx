@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const productImages = [
+    "https://cdn.poehali.dev/files/8b3463fb-4ecd-4b9f-9f34-addf705d87c4.jpg",
+    "https://cdn.poehali.dev/files/e62696bd-eb99-417e-b7c5-bec7497d01b3.jpg",
+    "https://images.unsplash.com/photo-1581582786363-39213896315f?auto=format&fit=crop&q=80",
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +20,13 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % productImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const navLinks = [
@@ -40,13 +54,20 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Product Image - visible on desktop */}
+        {/* Product Slider - visible on desktop */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
-          <img 
-            src="https://cdn.poehali.dev/files/8b3463fb-4ecd-4b9f-9f34-addf705d87c4.jpg" 
-            alt="BarBear Matte Paste" 
-            className="h-20 rounded-xl shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-white/20" 
-          />
+          <div className="relative w-16 h-16 overflow-hidden rounded-lg shadow-2xl border-2 border-white/20">
+            {productImages.map((img, index) => (
+              <img
+                key={img}
+                src={img}
+                alt={`BarBear Product ${index + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Desktop navigation */}
@@ -64,7 +85,7 @@ const Header = () => {
               {link.name}
             </a>
           ))}
-          <Button className="bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 h-11 px-6">
+          <Button className="bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/30 h-11 px-6">
             Оптовый заказ
           </Button>
         </nav>
@@ -84,13 +105,20 @@ const Header = () => {
       {mobileMenuOpen && (
         <nav className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg animate-fade-in">
           <div className="container-custom py-5 flex flex-col space-y-4">
-            {/* Mobile product image */}
+            {/* Mobile product slider */}
             <div className="flex justify-center mb-2">
-              <img 
-                src="https://cdn.poehali.dev/files/8b3463fb-4ecd-4b9f-9f34-addf705d87c4.jpg" 
-                alt="BarBear Matte Paste" 
-                className="h-16 rounded-lg shadow-md" 
-              />
+              <div className="relative w-16 h-16 overflow-hidden rounded-lg shadow-md">
+                {productImages.map((img, index) => (
+                  <img
+                    key={img}
+                    src={img}
+                    alt={`BarBear Product ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
             
             {navLinks.map((link) => (
@@ -103,7 +131,7 @@ const Header = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="w-full">Оптовый заказ</Button>
+            <Button className="w-full bg-primary text-white">Оптовый заказ</Button>
           </div>
         </nav>
       )}
