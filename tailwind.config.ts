@@ -62,18 +62,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// BearStyle custom colors
-				brown: {
-					50: '#FAF5F0',
-					100: '#F0E6D8',
-					200: '#E1CDB1',
-					300: '#D2B48C',
-					400: '#C19A67',
-					500: '#A67C45',
-					600: '#8C6437',
-					700: '#704D2A',
-					800: '#57381F',
-					900: '#3D2615',
+				luxury: {
+					gold: '#D4AF37',
+					'gold-light': '#F4E4B0',
+					'gold-dark': '#B8942A',
+					black: '#1A1A1A',
+					charcoal: '#2D2D2D',
 				},
 			},
 			borderRadius: {

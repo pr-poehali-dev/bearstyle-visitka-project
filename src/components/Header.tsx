@@ -25,18 +25,18 @@ const Header = () => {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md py-2" : "bg-transparent py-4"
+        isScrolled ? "glass-effect shadow-2xl py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <img 
               src="https://cdn.poehali.dev/files/e62696bd-eb99-417e-b7c5-bec7497d01b3.jpg" 
               alt="BarBear Product" 
-              className="w-10 h-10 rounded-full hidden md:block"
+              className="w-12 h-12 rounded-full hidden md:block shadow-lg border-2 border-white/20"
             />
-            <span className="text-2xl font-bold text-primary">BarBear</span>
+            <span className={`text-2xl font-bold transition-colors ${isScrolled ? 'text-foreground' : 'text-white drop-shadow-lg'}`}>BarBear</span>
           </div>
         </Link>
 
@@ -45,7 +45,7 @@ const Header = () => {
           <img 
             src="https://cdn.poehali.dev/files/8b3463fb-4ecd-4b9f-9f34-addf705d87c4.jpg" 
             alt="BarBear Matte Paste" 
-            className="h-16 rounded-lg shadow-md transition-all duration-300 hover:scale-105" 
+            className="h-20 rounded-xl shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-white/20" 
           />
         </div>
 
@@ -55,12 +55,18 @@ const Header = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-foreground/80 hover:text-primary font-medium transition-colors"
+              className={`font-medium transition-colors text-base ${
+                isScrolled 
+                  ? 'text-foreground/80 hover:text-primary' 
+                  : 'text-white/90 hover:text-white drop-shadow'
+              }`}
             >
               {link.name}
             </a>
           ))}
-          <Button>Оптовый заказ</Button>
+          <Button className="bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 h-11 px-6">
+            Оптовый заказ
+          </Button>
         </nav>
 
         {/* Mobile menu button */}

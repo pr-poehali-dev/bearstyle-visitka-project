@@ -37,35 +37,43 @@ const Index = () => {
       <Header />
       
       {/* Hero section */}
-      <section className="relative min-h-screen flex items-center">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <img 
             src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80" 
             alt="BearStyle Hero" 
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
         
-        <div className="container-custom pt-20">
-          <div className="max-w-2xl">
-            <h1 className="heading-xl mb-6">
-              Стиль, который подчеркивает <span className="text-primary">характер</span>
+        <div className="container-custom pt-20 relative">
+          <div className="max-w-3xl">
+            <div className="inline-block mb-6 px-4 py-2 glass-effect rounded-full text-sm font-medium text-foreground">
+              🏆 Премиум-бренд №1 в России
+            </div>
+            <h1 className="heading-xl mb-6 text-white drop-shadow-2xl">
+              Стиль, который подчеркивает <span className="premium-gradient bg-clip-text text-transparent">характер</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
               Премиальные стайлинговые средства для настоящих мужчин.
               Создавайте безупречные укладки с BearStyle.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" href="#products">Наша продукция</Button>
-              <Button size="lg" variant="outline" href="#contact">Оптовые поставки</Button>
+              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/20 h-14 px-8 text-base" href="#products">
+                Наша продукция
+              </Button>
+              <Button size="lg" variant="outline" className="glass-effect border-2 h-14 px-8 text-base text-white hover:bg-white/10" href="#contact">
+                Оптовые поставки
+              </Button>
             </div>
           </div>
         </div>
       </section>
       
       {/* Features section */}
-      <section id="features" className="section-padding bg-secondary/50">
+      <section id="features" className="section-padding bg-gradient-to-b from-white to-gray-50">
         <div className="container-custom">
           <div className="text-center mb-16">
             <h2 className="heading-lg mb-4">Почему выбирают BearStyle</h2>
@@ -95,7 +103,7 @@ const Index = () => {
       </section>
       
       {/* Products section */}
-      <section id="products" className="section-padding">
+      <section id="products" className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-16">
             <h2 className="heading-lg mb-4">Наша продукция</h2>
@@ -119,14 +127,15 @@ const Index = () => {
       </section>
       
       {/* About section */}
-      <section id="about" className="section-padding bg-brown-50">
+      <section id="about" className="section-padding bg-gradient-to-br from-gray-50 via-white to-amber-50/30">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="relative">
+              <div className="absolute -inset-4 premium-gradient opacity-20 blur-3xl rounded-full"></div>
               <img 
                 src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80" 
                 alt="О BearStyle" 
-                className="rounded-lg shadow-lg w-full h-auto"
+                className="rounded-2xl shadow-2xl w-full h-auto relative z-10"
               />
             </div>
             <div>
@@ -165,32 +174,39 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-card hover:shadow-md transition-all">
-              <Phone className="h-8 w-8 text-primary mb-4" />
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl glass-effect hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full premium-gradient flex items-center justify-center mb-6 shadow-xl">
+                <Phone className="h-8 w-8 text-white" />
+              </div>
               <h3 className="text-xl font-bold mb-2">Телефон</h3>
               <p className="text-muted-foreground mb-4">Пн-Пт с 9:00 до 18:00</p>
-              <a href="tel:+74951234567" className="text-primary font-medium hover:underline">+7 (495) 123-45-67</a>
+              <a href="tel:+74951234567" className="text-primary font-medium hover:underline text-lg">+7 (495) 123-45-67</a>
             </div>
             
-            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-card hover:shadow-md transition-all">
-              <Mail className="h-8 w-8 text-primary mb-4" />
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl glass-effect hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full premium-gradient flex items-center justify-center mb-6 shadow-xl">
+                <Mail className="h-8 w-8 text-white" />
+              </div>
               <h3 className="text-xl font-bold mb-2">Email</h3>
               <p className="text-muted-foreground mb-4">Ответим в течение 24 часов</p>
-              <a href="mailto:info@bearstyle.ru" className="text-primary font-medium hover:underline">info@bearstyle.ru</a>
+              <a href="mailto:info@bearstyle.ru" className="text-primary font-medium hover:underline text-lg">info@bearstyle.ru</a>
             </div>
             
-            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-card hover:shadow-md transition-all">
-              <MapPin className="h-8 w-8 text-primary mb-4" />
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl glass-effect hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full premium-gradient flex items-center justify-center mb-6 shadow-xl">
+                <MapPin className="h-8 w-8 text-white" />
+              </div>
               <h3 className="text-xl font-bold mb-2">Адрес</h3>
               <p className="text-muted-foreground mb-4">Офис и шоурум</p>
-              <address className="not-italic">Москва, ул. Примерная, д. 123</address>
+              <address className="not-italic text-lg">Москва, ул. Примерная, д. 123</address>
             </div>
           </div>
           
-          <div className="mt-16 p-8 bg-primary/5 rounded-lg">
-            <div className="text-center mb-8">
+          <div className="mt-16 p-12 glass-effect rounded-3xl relative overflow-hidden">
+            <div className="absolute -right-20 -top-20 w-64 h-64 premium-gradient opacity-10 blur-3xl rounded-full"></div>
+            <div className="text-center mb-8 relative z-10">
               <h3 className="heading-md mb-2">Оптовые заказы</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-lg">
                 Заполните форму, и наш менеджер свяжется с вами для обсуждения условий сотрудничества
               </p>
             </div>

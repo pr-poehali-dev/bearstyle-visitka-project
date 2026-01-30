@@ -4,44 +4,44 @@
 
 @layer base {
   :root {
-    --background: 20 40% 98%;
-    --foreground: 22 22% 15%;
+    --background: 0 0% 100%;
+    --foreground: 220 18% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 22 22% 15%;
+    --card-foreground: 220 18% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 22 22% 15%;
+    --popover-foreground: 220 18% 10%;
 
-    --primary: 22 74% 35%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 26 100% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 36 45% 94%;
-    --secondary-foreground: 22 22% 15%;
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 220 18% 10%;
 
-    --muted: 36 15% 92%;
-    --muted-foreground: 22 10% 40%;
+    --muted: 220 12% 96%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 10 80% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 26 100% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 22 15% 85%;
-    --input: 22 15% 85%;
-    --ring: 22 74% 35%;
+    --border: 220 12% 92%;
+    --input: 220 12% 92%;
+    --ring: 26 100% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 20 40% 98%;
-    --sidebar-foreground: 22 22% 15%;
-    --sidebar-primary: 22 74% 35%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 36 15% 92%;
-    --sidebar-accent-foreground: 22 22% 15%;
-    --sidebar-border: 22 15% 85%;
-    --sidebar-ring: 22 74% 35%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 18% 10%;
+    --sidebar-primary: 26 100% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 12% 96%;
+    --sidebar-accent-foreground: 220 18% 10%;
+    --sidebar-border: 220 12% 92%;
+    --sidebar-ring: 26 100% 55%;
   }
 
   .dark {
@@ -90,7 +90,10 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
   }
 }
 
@@ -98,20 +101,31 @@
   .container-custom {
     @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
-  
+
   .heading-xl {
-    @apply text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight;
+    @apply text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight;
+    letter-spacing: -0.02em;
   }
-  
+
   .heading-lg {
-    @apply text-3xl sm:text-4xl font-bold;
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold;
+    letter-spacing: -0.01em;
   }
-  
+
   .heading-md {
-    @apply text-2xl sm:text-3xl font-bold;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+    letter-spacing: -0.01em;
   }
-  
+
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
+  }
+
+  .premium-gradient {
+    @apply bg-gradient-to-br from-primary via-amber-500 to-orange-600;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl;
   }
 }

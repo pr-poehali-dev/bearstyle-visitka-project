@@ -10,12 +10,12 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ icon: Icon, title, description, className }: FeatureCardProps) => {
   return (
-    <div className={cn("p-6 rounded-lg bg-card hover:shadow-md transition-all", className)}>
-      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-        <Icon className="h-6 w-6 text-primary" />
+    <div className={cn("p-8 rounded-2xl glass-effect hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group", className)}>
+      <div className="w-16 h-16 rounded-2xl premium-gradient flex items-center justify-center mb-6 shadow-xl group-hover:scale-110 transition-transform duration-300">
+        <Icon className="h-8 w-8 text-white" />
       </div>
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+      <h3 className="text-2xl font-bold mb-3">{title}</h3>
+      <p className="text-muted-foreground text-base leading-relaxed">{description}</p>
     </div>
   );
 };
