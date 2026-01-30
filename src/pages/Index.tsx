@@ -2,9 +2,30 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import ProductCard, { ProductProps } from "@/components/ProductCard";
 import FeatureCard from "@/components/FeatureCard";
-import { Award, BarChart, Truck, UserCheck, Mail, Phone, MapPin } from "lucide-react";
+import { Award, BarChart, Truck, UserCheck, Mail, Phone, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 
 const Index = () => {
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+
+  const heroImages = [
+    "https://images.unsplash.com/photo-1581582786363-39213896315f?auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1597854586684-382c1efb48b8?auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1621607510062-ec062a64a99a?auto=format&fit=crop&q=80",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroSlide((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
   const products: ProductProps[] = [
     {
       id: "pomade",
@@ -29,6 +50,22 @@ const Index = () => {
       price: "От 399 ₽",
       image: "https://images.unsplash.com/photo-1621607510062-ec062a64a99a?auto=format&fit=crop&q=80",
       features: ["Легкая фиксация", "Глянцевый эффект", "Для создания текстуры"]
+    },
+    {
+      id: "clay",
+      name: "BearStyle Глина для волос",
+      description: "Экстра сильная фиксация с объемом",
+      price: "От 549 ₽",
+      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80",
+      features: ["Экстра фиксация", "Натуральный объем", "Подходит для густых волос"]
+    },
+    {
+      id: "gel",
+      name: "BearStyle Гель для укладки",
+      description: "Сильная фиксация с мокрым эффектом",
+      price: "От 399 ₽",
+      image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80",
+      features: ["Сильная фиксация", "Мокрый эффект", "Долговременная укладка"]
     }
   ];
 
@@ -60,13 +97,46 @@ const Index = () => {
               Премиальные стайлинговые средства для настоящих мужчин.
               Создавайте безупречные укладки с BearStyle.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mb-12">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/20 h-14 px-8 text-base" href="#products">
                 Наша продукция
               </Button>
               <Button size="lg" variant="outline" className="glass-effect border-2 border-white/40 h-14 px-8 text-base text-white hover:bg-white/20 hover:text-white" href="#contact">
                 Оптовые поставки
               </Button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Hero Slider */}
+        <div className="absolute bottom-20 left-0 right-0 container-custom">
+          <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl">
+            {heroImages.map((img, index) => (
+              <div
+                key={img}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === heroSlide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <img
+                  src={img}
+                  alt={`Product ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+            ))}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setHeroSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === heroSlide ? "bg-white w-8" : "bg-white/50"
+                  }`}
+                  aria-label={`Slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -112,10 +182,34 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          {/* Product Carousel */}
+          <div className="relative">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-6">
+                {products.map((product) => (
+                  <div key={product.id} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%]">
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation Buttons */}
+            <button
+              onClick={scrollPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full glass-effect premium-gradient flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-10"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            
+            <button
+              onClick={scrollNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full glass-effect premium-gradient flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-10"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
           </div>
           
           <div className="mt-12 text-center">
